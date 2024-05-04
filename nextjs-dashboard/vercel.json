@@ -1,5 +1,0 @@
-{
-    "rewrites": [
-      { "source": "/(.*)", "destination": "/Fincentive/nextjs-dashboard" }
-    ]
-  }
