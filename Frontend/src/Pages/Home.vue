@@ -1,14 +1,14 @@
 <template>
     <div class="home">
       <header class="home-header">
-        <div class="title">Welcome to Stock Market App</div>
+        <div class="title">Welcome to Fincentive</div>
         <div class="auth-buttons">
           <button @click="goToLogin">Login</button>
           <button @click="goToSignup">Sign Up</button>
         </div>
       </header>
       <main class="home-main">
-        <h1>Stock Market</h1>
+        <h1>Fincentive</h1>
         <p>Track your stocks and manage your investments with ease. Stay updated with the latest market trends and make informed decisions.</p>
       </main>
     </div>
@@ -32,8 +32,10 @@
   .home {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    background-color: #121212;
+    height: 100vh;
+    width: 100%;
+    background: url('../assets/StockBg.png');
+    background-size: cover;
     color: #ffffff;
   }
   
@@ -42,8 +44,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #1e1e1e;
-  }
+    background-color: rgba(30, 30, 30, 0.8);
+}
   
   .title {
     font-size: 1.5rem;
