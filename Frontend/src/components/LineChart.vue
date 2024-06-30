@@ -50,11 +50,15 @@ export default {
     return {
       chartData: {
         labels: [],
-        datasets: [{ data: [40, 20, 12] }],
+        datasets: [{ 
+          label: `${this.ticker} Stock Price`,
+          backgroundColor: 'rgba(128, 0, 128, 0.2)',
+          borderColor: 'rgba(128, 0, 128, 1)',
+          data: [] 
+        }],
       },
       chartOptions: {
         responsive: true,
-        backgroundColor: "#f87979",
         plugins: {
           zoom: {
             pan: {
@@ -75,12 +79,20 @@ export default {
             },
           },
         },
+        scales: {
+          x: {
+            ticks: {
+              color: '#ffffff',
+            }
+          },
+          y: {
+            ticks: {
+              color: '#ffffff',
+            }
+          }
+        }
       },
-      // ticker: "IBM",
       stockMarketHistory: [],
-      stockMarketHistoryDates: [],
-      stockMarketHistoryEpochDates: [],
-      stockMarketHistoryPrices: [],
     };
   },
   watch: {
@@ -92,30 +104,28 @@ export default {
       axios
         .get(this.apiLink)
         .then((response) => {
-          this.stockMarketHistory = response.data;
+          this.stockMarketHistory = response.data["Time Series (Daily)"];
           const labels = [];
           const data = [];
-          console.log(this.ticker);
-          console.log(this.stockMarketHistory["Time Series (Daily)"]);
-          // console.log(this.stockMarketHistory)
-          for (const property in this.stockMarketHistory[
-            "Time Series (Daily)"
-          ]) {
-            let openPrice =
-              this.stockMarketHistory["Time Series (Daily)"][property][
-                "1. open"
-              ];
+
+          for (const date in this.stockMarketHistory) {
+            let openPrice = this.stockMarketHistory[date]["1. open"];
             if (this.period === "Max") {
-              labels.unshift(property);
+              labels.unshift(date);
               data.unshift(openPrice);
             } else if (this.period === "Year") {
-                if (property.split("-")[0] > 2022) {
-                  labels.unshift(property);
-                  data.unshift(openPrice);
-                }
-            } else{
-              if(property.split("-")[1] > 5 && property.split("-")[0] == 2024) {
-                labels.unshift(property);
+              if (new Date(date).getFullYear() > new Date().getFullYear() - 1) {
+                labels.unshift(date);
+                data.unshift(openPrice);
+              }
+            } else if (this.period === "Month") {
+              const currentDate = new Date();
+              const dataDate = new Date(date);
+              if (
+                dataDate.getFullYear() === currentDate.getFullYear() &&
+                dataDate.getMonth() === currentDate.getMonth()
+              ) {
+                labels.unshift(date);
                 data.unshift(openPrice);
               }
             }
@@ -125,8 +135,10 @@ export default {
             labels: labels,
             datasets: [
               {
+                label: `${this.ticker} Stock Price`,
+                backgroundColor: 'rgba(128, 0, 128, 0.2)',
+                borderColor: 'rgba(128, 0, 128, 1)',
                 data: data,
-                backgroundColor: "#f87979",
               },
             ],
           };
@@ -144,8 +156,12 @@ export default {
   mounted() {
     this.rangeStockChart();
   },
-  created() {
-    console.log(this.apiLink);
-  },
 };
 </script>
+
+<style scoped>
+.line-chart {
+  width: 100%;
+  margin-top: 20px;
+}
+</style>
