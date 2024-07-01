@@ -12,7 +12,7 @@
     name: "BalanceCard",
     props: {
       currentBalance: {
-        type: Number,
+        type: String,
         required: true,
       },
     },
