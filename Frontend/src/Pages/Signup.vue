@@ -3,19 +3,23 @@
 </template>
 
 <script>
-import AuthForm from '../components/AuthForm.vue'
+import AuthForm from "../components/AuthForm.vue";
 
 export default {
   name: "Signup",
   components: {
-    AuthForm
+    AuthForm,
   },
   methods: {
     handleSignup(email, password) {
       // Handle login logic
+      this.$store.dispatch("signup", { 
+        email: email,
+        password: password,
+      });
       console.log("Signup:", email, password);
-    }
-  }
+    },
+  },
 };
 </script>
 

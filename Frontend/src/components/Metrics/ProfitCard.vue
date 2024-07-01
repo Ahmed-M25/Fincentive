@@ -12,7 +12,7 @@
     name: "ProfitCard",
     props: {
       percentProfit: {
-        type: String,
+        type: Number,
         required: true,
       },
     },

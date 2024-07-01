@@ -35,8 +35,8 @@
         token: '',
         ticker: 'IBM',
         duration: 'Max',
-        currentBalance: '10000', //replace later
-        percentProfit: '5', //replace later
+        currentBalance: 10000, //replace later
+        percentProfit: 5, //replace later
       };
     },
     methods: {
@@ -49,8 +49,8 @@
         this.updateMetrics();
       },
       updateMetrics() { //add logic later
-        this.currentBalance = toString(Math.floor(Math.random() * 20000) + 5000);
-        this.percentProfit = toString((Math.random() * 100).toFixed(2));
+        this.currentBalance = Math.floor(Math.random() * 20000) + 5000;
+        this.percentProfit = parseFloat((Math.random() * 100).toFixed(2));
       },
     },
   };
