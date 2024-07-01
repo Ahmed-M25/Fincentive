@@ -11,10 +11,14 @@
       AuthForm
     },
     methods: {
-      handleLogin(email, password) {
+      async handleLogin(email, password) {
         // Handle login logic
+        await this.$store.dispatch("login", { 
+        email: email,
+        password: password,
+      });
         console.log("Login:", email, password);
-      }
+      } 
     }
   };
   </script>

@@ -11,13 +11,14 @@ export default {
     AuthForm,
   },
   methods: {
-    handleSignup(email, password) {
+    async handleSignup(email, password) {
       // Handle login logic
-      this.$store.dispatch("signup", { 
+      await this.$store.dispatch("signup", { 
         email: email,
         password: password,
       });
       console.log("Signup:", email, password);
+      this.$router.push({ name: 'Login' });
     },
   },
 };
