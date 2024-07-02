@@ -1,34 +1,44 @@
 <template>
   <div class="login">
-    <auth-form title="Login" buttonText="Login" :onSubmit="handleLogin" />
-    <error-card
-      v-if="errorMessage"
-      :message="errorMessage"
-      @close="errorMessage = null"
-    />
+    <div class="flex items-center justify-center min-h-screen bg-gray-900">
+      <div class="bg-gray-800 p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h2 class="text-2xl font-bold mb-6 text-center text-gray-100">Login</h2>
+        <auth-form v-if="!isLoading" title="Login" buttonText="Login" :onSubmit="handleLogin" />
+        <LoadingSpinner v-else></LoadingSpinner>
+        <error-card
+          v-if="errorMessage"
+          :message="errorMessage"
+          @close="errorMessage = null"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import AuthForm from "../components/AuthForm.vue";
-import ErrorCard from '../components/ErrorCard.vue'
+import ErrorCard from "../components/ErrorCard.vue";
+import LoadingSpinner from '../components/LoadingSpinner.vue';
 
 export default {
   name: "Login",
   components: {
     AuthForm,
-    ErrorCard
+    ErrorCard,
+    LoadingSpinner
   },
 
   data() {
     return {
       errorMessage: null,
+      isLoading: false
     };
   },
 
   methods: {
     async handleLogin(email, password) {
       // Handle login logic
+      this.isLoading = true;
       try {
         await this.$store.dispatch("login", {
           email: email,
@@ -36,57 +46,14 @@ export default {
         });
         console.log("Login:", email, password);
         this.errorMessage = null;
-        this.$router.push({ name: 'Dashboard' });
+        this.$router.push({ name: "Dashboard" });
       } catch (error) {
         this.errorMessage = "Invalid login details. Please try again.";
         console.error("Login failed:", error);
+      } finally {
+          this.isLoading = false;
       }
     },
   },
 };
 </script>
-
-<style scoped>
-.login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: #121212;
-  color: #ffffff;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-label {
-  font-size: 1rem;
-}
-
-input {
-  padding: 10px;
-  font-size: 1rem;
-  border: 2px solid #333333;
-  border-radius: 5px;
-  background-color: #1e1e1e;
-  color: #ffffff;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  background-color: #6200ea;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #3700b3;
-}
-</style>

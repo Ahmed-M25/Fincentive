@@ -8,7 +8,7 @@
         </div>
       </header>
       <main class="home-main">
-        <h1>Fincentive</h1>
+        <h1 class="text-3xl font-bold">Fincentive</h1>
         <p>Track your stocks and manage your investments with ease. Stay updated with the latest market trends and make informed decisions.</p>
       </main>
     </div>

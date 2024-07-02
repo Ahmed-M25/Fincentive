@@ -1,10 +1,12 @@
 <template>
-  <Line
+  <div class="line-chart-container w-full mt-5 bg-gray-900 rounded p-5">
+    <Line
     id="my-chart-id"
     :options="chartOptions"
     :data="chartData"
-    style="width: 900px"
+    class="w-full h-96"
   />
+  </div>
 </template>
 
 <script>
@@ -159,10 +161,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.line-chart {
-  width: 100%;
-  margin-top: 20px;
-}
-</style>

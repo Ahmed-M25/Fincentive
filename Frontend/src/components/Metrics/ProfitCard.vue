@@ -1,34 +1,20 @@
 <template>
-    <div class="profit-card">
-      <h2>% Profit</h2>
-      <div class="metric">
-        <span>{{ percentProfit }}</span>
-      </div>
+  <div class="profit-card border border-gray-700 shadow-lg rounded-lg p-4 m-2 flex-1 text-center bg-gray-800 text-white">
+    <h2 class="text-xl font-semibold mb-4">Percentage Profit</h2>
+    <div class="metric">
+      <span class="text-2xl font-bold">{{ percentProfit + "%" }}</span>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    name: "ProfitCard",
-    props: {
-      percentProfit: {
-        type: Number,
-        required: true,
-      },
+  </div>
+</template>
+
+<script>
+export default {
+  name: "ProfitCard",
+  props: {
+    percentProfit: {
+      type: Number,
+      required: true,
     },
-  };
-  </script>
-  
-  <style scoped>
-  .profit-card {
-    border: 1px solid #444444;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px;
-    flex: 1;
-    text-align: center;
-    background-color: #1e1e1e;
-    color: #ffffff;
-  }
-  </style>
-  
+  },
+};
+</script>

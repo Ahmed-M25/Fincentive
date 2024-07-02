@@ -1,16 +1,38 @@
 <template>
   <div class="auth-form">
-    <h1>{{ title }}</h1>
     <form @submit.prevent="handleSubmit">
       <div>
-        <label for="email">Email</label>
-        <input type="email" id="email" v-model="email" />
+        <label class="block text-gray-400 text-sm font-bold mb-2" for="email"
+          >Email</label
+        >
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          type="email"
+          id="email"
+          v-model="email"
+          required
+        />
       </div>
-      <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" v-model="password" />
+      <div class="mb-6">
+        <label class="block text-gray-400 text-sm font-bold mb-2" for="password"
+          >Password</label
+        >
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          type="password"
+          id="password"
+          v-model="password"
+          required
+        />
       </div>
-      <button type="submit">{{ buttonText }}</button>
+      <div class="flex items-center justify-between">
+        <button
+          type="submit"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus: shadow-outline"
+        >
+          {{ buttonText }}
+        </button>
+      </div>
     </form>
   </div>
 </template>
@@ -48,47 +70,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.auth-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: #121212;
-  color: #ffffff;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-label {
-  font-size: 1rem;
-}
-
-input {
-  padding: 10px;
-  font-size: 1rem;
-  border: 2px solid #333333;
-  border-radius: 5px;
-  background-color: #1e1e1e;
-  color: #ffffff;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  background-color: #6200ea;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #3700b3;
-}
-</style>

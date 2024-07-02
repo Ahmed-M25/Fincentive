@@ -1,30 +1,57 @@
 <template>
-  <auth-form title="Sign Up" buttonText="Sign Up" :onSubmit="handleSignup" />
+  <div class="signup">
+    <div class="flex items-center justify-center min-h-screen bg-gray-900">
+      <div class="bg-gray-800 p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h2 class="text-2xl font-bold mb-6 text-center text-gray-100">
+          Sign Up
+        </h2>
+        <auth-form v-if="!isLoading"
+          title="Sign Up"
+          buttonText="Sign Up"
+          :onSubmit="handleSignup"
+        />
+        <LoadingSpinner v-else></LoadingSpinner>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import AuthForm from "../components/AuthForm.vue";
+import LoadingSpinner from '../components/LoadingSpinner.vue';
 
 export default {
   name: "Signup",
   components: {
     AuthForm,
+    LoadingSpinner
   },
+  data() {
+    return {
+      isLoading: false
+    };
+  },
+
   methods: {
     async handleSignup(email, password) {
-      // Handle login logic
-      await this.$store.dispatch("signup", { 
-        email: email,
-        password: password,
-      });
-      console.log("Signup:", email, password);
-      this.$router.push({ name: 'Login' });
+      // Handle Signup logic
+      this.isLoading = true;
+      try{
+        await this.$store.dispatch("signup", {
+          email: email,
+          password: password,
+        });
+        console.log("Signup:", email, password);
+        this.$router.push({ name: 'Login' });
+      } finally {
+        this.isLoading = false;
+      }
     },
   },
 };
 </script>
 
-<style scoped>
+<!-- <style scoped>
 .login {
   display: flex;
   flex-direction: column;
@@ -67,4 +94,4 @@ button {
 button:hover {
   background-color: #3700b3;
 }
-</style>
+</style> -->
