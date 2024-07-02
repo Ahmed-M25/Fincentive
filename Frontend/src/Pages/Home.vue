@@ -1,96 +1,35 @@
 <template>
-    <div class="home">
-      <header class="home-header">
-        <div class="title">Welcome to Fincentive</div>
-        <div class="auth-buttons">
-          <button @click="goToLogin">Login</button>
-          <button @click="goToSignup">Sign Up</button>
-        </div>
-      </header>
-      <main class="home-main">
-        <h1 class="text-3xl font-bold">Fincentive</h1>
-        <p>Track your stocks and manage your investments with ease. Stay updated with the latest market trends and make informed decisions.</p>
-      </main>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    name: "Home",
-    methods: {
-      goToLogin() {
-        this.$router.push({ name: 'Login' });
-      },
-      goToSignup() {
-        this.$router.push({ name: 'Signup' });
-      },
+  <div class="home min-h-screen flex flex-col bg-cover bg-center text-white bg-hero">
+    <header class="home-header flex justify-between items-center p-5 bg-gray-900 bg-opacity-80">
+      <div class="title text-xl font-bold">Welcome to Fincentive</div>
+      <div class="auth-buttons flex gap-4">
+        <button @click="goToLogin" class="px-4 py-2 bg-purple-700 hover:bg-purple-500 text-white rounded">Login</button>
+        <button @click="goToSignup" class="px-4 py-2 bg-purple-700 hover:bg-purple-500 text-white rounded">Sign Up</button>
+      </div>
+    </header>
+    <main class="home-main flex-1 flex flex-col justify-center items-center p-5 text-center">
+      <h1 class="text-4xl font-bold mb-5 text-shadow-md">Fincentive</h1>
+      <p class="text-lg max-w-xl leading-relaxed">Track your stocks and manage your investments with ease. Stay updated with the latest market trends and make informed decisions.</p>
+    </main>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Home",
+  methods: {
+    goToLogin() {
+      this.$router.push({ name: 'Login' });
     },
-  };
-  </script>
-  
-  <style scoped>
-  .home {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100%;
-    background: url('../assets/StockBg.png');
-    background-size: cover;
-    color: #ffffff;
-  }
-  
-  .home-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: rgba(30, 30, 30, 0.8);
+    goToSignup() {
+      this.$router.push({ name: 'Signup' });
+    },
+  },
+};
+</script>
+
+<style scoped>
+.text-shadow-md {
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.2);
 }
-  
-  .title {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .auth-buttons {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .auth-buttons button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    background-color: #6200ea;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .auth-buttons button:hover {
-    background-color: #3700b3;
-  }
-  
-  .home-main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .home-main h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.2);
-  }
-  
-  .home-main p {
-    font-size: 1.2rem;
-    max-width: 600px;
-    line-height: 1.5;
-  }
-  </style>
-  
+</style>
