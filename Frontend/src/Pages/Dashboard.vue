@@ -1,5 +1,6 @@
 <template>
   <div id="Dashboard" class="flex flex-col items-center justify-center w-full h-full min-h-screen bg-gray-900 text-white">
+    <button @click="logout" class="absolute top-4 right-4 px-4 py-2 text-lg bg-red-600 rounded hover:bg-red-700">Logout</button>
     <h1 class="text-4xl font-bold text-center mb-8">Fincentive</h1>
     <form @submit.prevent="handleSubmit" class="mb-6">
       <div class="form-control flex items-center justify-center space-x-4">
@@ -67,6 +68,10 @@ export default {
       this.percentProfit = parseFloat((Math.random() * 100).toFixed(2));
       this.stockValue = Math.floor(Math.random() * 20000) + 5000;
     },
+    logout() {
+      this.$store.dispatch('auth/logout');
+      this.$router.push('/login');
+    }
   },
 };
 </script>

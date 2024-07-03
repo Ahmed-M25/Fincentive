@@ -40,13 +40,12 @@ export default {
       // Handle login logic
       this.isLoading = true;
       try {
-        await this.$store.dispatch("login", {
+        await this.$store.dispatch("auth/login", {
           email: email,
           password: password,
         });
-        console.log("Login:", email, password);
         this.errorMessage = null;
-        this.$router.push({ name: "Dashboard" });
+        this.$router.push('/dashboard');
       } catch (error) {
         this.errorMessage = "Invalid login details. Please try again.";
         console.error("Login failed:", error);
