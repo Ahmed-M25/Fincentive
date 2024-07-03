@@ -42,6 +42,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  console.log('Navigation Guard:', store.getters['auth/isLoggedIn']);
   console.log('Navigation Guard:', store.getters['auth/isLoggedIn']); // Debug log
   if (to.meta.requiresAuth && !store.getters['auth/isLoggedIn']) {
     next('/login');

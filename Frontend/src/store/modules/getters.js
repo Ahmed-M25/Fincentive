@@ -1,9 +1,9 @@
 export default {
     userId(state) {
-        return state.userId;
+      return state.userId;
     },
-
-    isLoggenIn(state) {
-        return !!state.token;
-    }
-};
+    isLoggedIn(state) {
+      return !!state.token;
+    },
+  };
+  

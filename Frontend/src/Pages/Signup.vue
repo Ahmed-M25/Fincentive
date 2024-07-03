@@ -37,7 +37,7 @@ export default {
       // Handle Signup logic
       this.isLoading = true;
       try{
-        await this.$store.dispatch("signup", {
+        await this.$store.dispatch("auth/signup", {
           email: email,
           password: password,
         });
