@@ -11,6 +11,9 @@
           :onSubmit="handleSignup"
         />
         <LoadingSpinner v-else></LoadingSpinner>
+        <div class="flex justify-center mt-4">
+          <router-link to="/login" class="text-blue-500 hover:underline">Login</router-link>
+        </div>
       </div>
     </div>
   </div>

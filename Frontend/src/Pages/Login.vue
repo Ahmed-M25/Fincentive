@@ -10,6 +10,9 @@
           :message="errorMessage"
           @close="errorMessage = null"
         />
+        <div class="flex justify-center mt-4">
+          <router-link to="/signup" class="text-blue-500 hover:underline">Sign Up</router-link>
+        </div>
       </div>
     </div>
   </div>
