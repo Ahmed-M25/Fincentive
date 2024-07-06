@@ -6,8 +6,8 @@ export default {
   namespaced: true,
   state() {
     return {
-      userId: null,
       token: null,
+      userId: null,
       tokenExpiration: null,
     };
   },

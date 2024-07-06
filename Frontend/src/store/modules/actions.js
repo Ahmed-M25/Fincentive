@@ -27,6 +27,7 @@ export default {
       tokenExpiration: responseData.expiresIn,
     });
   },
+
   async signup(context, payload) {
     const apiKey = import.meta.env.VITE_FIREBASE_API_KEY;
     const response = await fetch(

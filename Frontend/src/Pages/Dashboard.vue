@@ -7,7 +7,7 @@
         <input
           type="text"
           placeholder="Enter Ticker"
-          v-model="token"
+          v-model="ticker"
           class="w-72 p-2 text-lg border-2 border-gray-700 rounded bg-gray-800 text-white"
         />
         <button
@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import LineChart from "../components/LineChart.vue";
 import BalanceCard from "../components/Metrics/BalanceCard.vue";
 import ProfitCard from "../components/Metrics/ProfitCard.vue";
@@ -65,17 +66,19 @@ export default {
   components: { LineChart, BalanceCard, ProfitCard, StockValue },
   data() {
     return {
-      token: '',
       ticker: 'IBM',
+      shares: 1,
       duration: 'Max',
       currentBalance: 10000, // replace later
       percentProfit: 5, // replace later
       stockValue: 300 // replace later
     };
   },
+  computed: {
+    ...mapGetters('auth', ['token']) // Ensure 'token' getter is mapped from the 'auth' module
+  },
   methods: {
     updateTicker() {
-      this.ticker = this.token;
       this.updateMetrics();
     },
     setTime(period) {
@@ -87,13 +90,45 @@ export default {
       this.percentProfit = parseFloat((Math.random() * 100).toFixed(2));
       this.stockValue = Math.floor(Math.random() * 20000) + 5000;
     },
-    buyShares() {
-      // add logic later
+    async buyShares() {
+      await this.recordTransaction('buy');
       console.log(`Buying ${this.shares} shares of ${this.ticker}`);
+      console.log(this.token);
     },
-    sellShares() {
-      // add logic later
+    async sellShares() {
+      await this.recordTransaction('sell');
       console.log(`Selling ${this.shares} shares of ${this.ticker}`);
+    },
+    async recordTransaction(type) {
+      try {
+        const idToken = this.token;
+
+        if (!idToken) {
+          throw new Error("ID token is missing");
+        }
+
+        const response = await fetch('http://localhost:3000/transaction', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            firebaseIdToken: idToken,
+            ticker: this.ticker,
+            shares: this.shares,
+            type: type
+          })
+        });
+
+        if (response.ok) {
+          console.log('Transaction recorded');
+          this.updateMetrics();
+        } else {
+          console.error('Error recording transaction');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
     },
     logout() {
       this.$store.dispatch('auth/logout');
