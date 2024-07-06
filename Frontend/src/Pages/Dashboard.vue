@@ -26,8 +26,14 @@
     </div>
     <div class="main-content flex w-full h-full max-w-7xl">
       <div class="metrics-container flex flex-col iterms-center justify-center w-1/3 p-4">
-        <div class="trade-section mt-6 p-4 bg-gray-800 rounded">
-          <h2 class="text-xl font-bold mb-4">Trade</h2>
+        <BalanceCard :currentBalance="currentBalance" />
+        <ProfitCard :percentProfit="percentProfit" />
+        <StockValue :stockValue="stockValue" />
+      </div>
+      <LineChart :ticker="ticker" :period="duration" class=" bg-gray-800 p-4 rounded" />
+      <div class="flex items-center justify-center w-1/4">
+        <div class="trade-section ml-6 mt-6 p-4 bg-gray-800 rounded shadow-lg">
+          <h2 class="text-xl font-bold mb-4 text-center">Trade</h2>
           <div class="flex items-center mb-4">
             <label for="shares" class="mr-4">Shares:</label>
             <input
@@ -39,15 +45,11 @@
             />
           </div>
           <div class="flex space-x-4">
-            <button @click="buyShares" class="px-4 py-2 bg-green-600 rounded hover:bg-green-700">Buy</button>
-            <button @click="sellShares" class="px-4 py-2 bg-red-600 rounded hover:bg-red-700">Sell</button>
+            <button @click="buyShares" class="flex-1 px-4 py-2 bg-green-600 rounded hover:bg-green-700">Buy</button>
+            <button @click="sellShares" class="flex-1 px-4 py-2 bg-red-600 rounded hover:bg-red-700">Sell</button>
           </div>
         </div>
-        <BalanceCard :currentBalance="currentBalance" />
-        <ProfitCard :percentProfit="percentProfit" />
-        <StockValue :stockValue="stockValue" />
       </div>
-      <LineChart :ticker="ticker" :period="duration" class=" bg-gray-800 p-4 rounded" />
     </div>
   </div>
 </template>
