@@ -1,11 +1,11 @@
 <template>
-  <div class="line-chart-container w-full mt-5 bg-gray-900 rounded p-5">
+  <div class="bg-gray-900 p-4 rounded-lg shadow-lg w-full h-96">
     <Line
-    id="my-chart-id"
-    :options="chartOptions"
-    :data="chartData"
-    class="w-full h-96"
-  />
+      id="my-chart-id"
+      :options="chartOptions"
+      :data="chartData"
+      class="w-full h-full"
+    />
   </div>
 </template>
 
@@ -61,6 +61,7 @@ export default {
       },
       chartOptions: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           zoom: {
             pan: {
