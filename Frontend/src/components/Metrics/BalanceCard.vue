@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-700 p-4 rounded-lg shadow-lg w-72">
+  <div class="bg-gray-700 p-4 rounded-lg shadow-lg w-80">
     <div class="flex justify-between items-center mb-4">
       <div class="text-white font-semibold">Current Balance</div>
       <div class="text-gray-500">
@@ -23,6 +23,11 @@
 </template>
 
 <script>
+import { Doughnut } from 'vue-chartjs';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
 export default {
   name: "BalanceCard",
     props: {

@@ -4,13 +4,16 @@
       <button @click="logout" class="absolute top-8 right-4 px-2 py-1 text-m bg-gray-800 rounded hover:underline">Logout</button>
       <a href="/home" class="absolute top-8 right-[82px] px-2 py-1 text-m hover:underline">home</a>
       <h1 class="text-3xl border-l-4 border-[#22A6FF] pl-4 font-headline font-bold absolute top-8">Fincentive</h1>
-      <div class="cards-container flex justify-center space-x-4 mb-6 w-full">
+      <div class="cards-container flex justify-center space-x-10 mt-6 w-full">
         <BalanceCard :currentBalance="currentBalance" :percentProfit="percentProfit" class="w-1/4" />
         <!-- <ProfitCard :percentProfit="percentProfit" class="w-1/4" /> -->
-        <StockValue :stockValue="stockValue" class="w-1/4" />
-        <div class="trade-section border border-gray-700 shadow-lg rounded-lg p-2 flex-1 text-center bg-gray-800 text-white w-1/4">
-          <h2 class="text-lg font-bold mb-2 text-center">Trade</h2>
-          <div class="flex items-center mb-2">
+        <StockValue :stockValue="stockValue" class="w-1/4"/>
+        <div class="trade-section bg-gray-700 p-4 rounded-lg shadow-lg w-80">
+          <div class="flex justify-between items-center mb-4">
+            <div class="text-white font-semibold">Trade Stocks</div>
+          </div>
+          <div class="flex-grow"></div>
+          <div class="flex mt-[15%] items-center mb-2">
             <label for="shares" class="mr-2">Shares:</label>
             <input
               type="number"
@@ -20,9 +23,9 @@
               min="1"
             />
           </div>
-          <div class="flex space-x-2">
-            <button @click="buyShares" class="flex-1 px-2 py-1 text-sm bg-green-600 rounded hover:bg-green-700">Buy</button>
-            <button @click="sellShares" class="flex-1 px-2 py-1 text-sm bg-red-600 rounded hover:bg-red-700">Sell</button>
+          <div class="flex space-x-2 mt-auto">
+            <button @click="buyShares" class="flex-1 px-2 py-1 text-sm bg-sky-600 rounded hover:bg-sky-700">Buy</button>
+            <button @click="sellShares" class="flex-1 px-2 py-1 text-sm bg-cyan-600 rounded hover:bg-cyan-700">Sell</button>
           </div>
         </div>
       </div>
@@ -62,7 +65,7 @@ import StockValue from "../components/Metrics/StockValue.vue";
 
 export default {
   name: "App",
-  components: { LineChart, BalanceCard, ProfitCard, StockValue },
+  components: { LineChart, BalanceCard, StockValue },
   data() {
     return {
       ticker: 'IBM',
