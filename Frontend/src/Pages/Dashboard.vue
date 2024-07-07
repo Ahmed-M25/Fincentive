@@ -1,33 +1,12 @@
 <template>
   <div id="Dashboard" class="flex flex-col items-center justify-center w-full h-full min-h-screen bg-gray-900 text-white">
-    <div class="card-container bg-gray-800 p-4 rounded-lg shadow-lg w-full max-w-5xl max-h-[90vh] overflow-y-auto relative">
-      <button @click="logout" class="absolute top-2 right-2 px-2 py-1 text-sm bg-red-600 rounded hover:bg-red-700">Logout</button>
-      <h1 class="text-2xl font-bold text-center mb-4">Fincentive</h1>
-      <form @submit.prevent="handleSubmit" class="mb-4">
-        <div class="form-control flex items-center justify-center space-x-2">
-          <input
-            type="text"
-            placeholder="Enter Ticker"
-            v-model="ticker"
-            class="w-40 p-1 text-sm border-2 border-gray-700 rounded bg-gray-800 text-white"
-          />
-          <button
-            type="submit"
-            @click="updateTicker"
-            class="px-2 py-1 text-sm bg-purple-600 rounded hover:bg-purple-700"
-          >
-            Search Stock
-          </button>
-        </div>
-      </form>
-      <div class="period flex space-x-2 mb-4">
-        <button @click="setTime('Max')" class="px-2 py-1 text-sm bg-gray-700 rounded hover:bg-gray-800">Max</button>
-        <button @click="setTime('Year')" class="px-2 py-1 text-sm bg-gray-700 rounded hover:bg-gray-800">Past Year</button>
-        <button @click="setTime('Month')" class="px-2 py-1 text-sm bg-gray-700 rounded hover:bg-gray-800">Past Month</button>
-      </div>
-      <div class="cards-container flex justify-center space-x-2 mb-4 w-full">
-        <BalanceCard :currentBalance="currentBalance" class="w-1/4" />
-        <ProfitCard :percentProfit="percentProfit" class="w-1/4" />
+    <div class="card-container bg-gray-800 p-6 rounded-3xl shadow-lg w-full max-w-6xl max-h-[90vh] overflow-y-auto relative min-h-[80vh] flex flex-col justify-center">
+      <button @click="logout" class="absolute top-8 right-4 px-2 py-1 text-m bg-gray-800 rounded hover:underline">Logout</button>
+      <a href="/home" class="absolute top-8 right-[82px] px-2 py-1 text-m hover:underline">home</a>
+      <h1 class="text-3xl border-l-4 border-[#22A6FF] pl-4 font-headline font-bold absolute top-8">Fincentive</h1>
+      <div class="cards-container flex justify-center space-x-4 mb-6 w-full">
+        <BalanceCard :currentBalance="currentBalance" :percentProfit="percentProfit" class="w-1/4" />
+        <!-- <ProfitCard :percentProfit="percentProfit" class="w-1/4" /> -->
         <StockValue :stockValue="stockValue" class="w-1/4" />
         <div class="trade-section border border-gray-700 shadow-lg rounded-lg p-2 flex-1 text-center bg-gray-800 text-white w-1/4">
           <h2 class="text-lg font-bold mb-2 text-center">Trade</h2>
@@ -47,8 +26,28 @@
           </div>
         </div>
       </div>
-      <div class="w-full">
+      <div class="w-full relative">
         <LineChart :ticker="ticker" :period="duration" class="w-full bg-gray-700 p-2 rounded" />
+        <div class="period flex space-x-2 absolute left-24 top-4">
+          <button @click="setTime('Max')" class="px-2 py-1 text-sm bg-gray-700 rounded hover:bg-gray-800">Max</button>
+          <button @click="setTime('Year')" class="px-2 py-1 text-sm bg-gray-700 rounded hover:bg-gray-800">Past Year</button>
+          <button @click="setTime('Month')" class="px-2 py-1 text-sm bg-gray-700 rounded hover:bg-gray-800">Past Month</button>
+        </div>
+        <form @submit.prevent="handleSubmit" class="absolute top-4 right-4 flex space-x-2">
+          <input
+            type="text"
+            placeholder="Enter Ticker"
+            v-model="ticker"
+            class="w-40 p-1 text-sm border-2 border-gray-700 rounded bg-gray-800 text-white"
+          />
+          <button
+            type="submit"
+            @click="updateTicker"
+            class="px-2 py-1 text-sm bg-sky-600 rounded hover:bg-sky-700"
+          >
+            Search Stock
+          </button>
+      </form>
       </div>
     </div>
   </div>
@@ -59,7 +58,6 @@
 import { mapGetters } from 'vuex';
 import LineChart from "../components/LineChart.vue";
 import BalanceCard from "../components/Metrics/BalanceCard.vue";
-import ProfitCard from "../components/Metrics/ProfitCard.vue";
 import StockValue from "../components/Metrics/StockValue.vue";
 
 export default {

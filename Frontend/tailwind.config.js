@@ -9,6 +9,9 @@ export default {
       backgroundImage: {
         'hero': "url('../src/assets/StockBg.png')"
       },
+      fontFamily: {
+        headline: ['Bebas Neue', 'sans-serif']
+      },
     },
   },
   plugins: [],

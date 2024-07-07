@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-900 p-4 rounded-lg shadow-lg w-full h-96">
+  <div class="bg-gray-800 p-4 rounded-lg shadow-lg w-full h-96">
     <Line
       id="my-chart-id"
       :options="chartOptions"
@@ -84,11 +84,17 @@ export default {
         },
         scales: {
           x: {
+            grid: {
+              color: '#6b7280',
+            },
             ticks: {
               color: '#ffffff',
             }
           },
           y: {
+            grid: {
+              color: '#6b7280',
+            },
             ticks: {
               color: '#ffffff',
             }
@@ -139,8 +145,8 @@ export default {
             datasets: [
               {
                 label: `${this.ticker} Stock Price`,
-                backgroundColor: 'rgba(128, 0, 128, 0.2)',
-                borderColor: 'rgba(128, 0, 128, 1)',
+                backgroundColor: 'rgba(70, 130, 180, 0.2)',
+                borderColor: 'rgba(70, 130, 180, 1)',
                 data: data,
               },
             ],
@@ -154,7 +160,8 @@ export default {
   computed: {
     apiLink() {
       const apiKey = import.meta.env.VUE_APP_API_KEY;
-      return `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${this.ticker}&outputsize=full&apikey=${apiKey}`;
+      // return `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${this.ticker}&outputsize=full&apikey=${apiKey}`;
+      return `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${this.ticker}&outputsize=full&apikey=demo`;
     },
   },
   mounted() {
