@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-gray-700 p-4 rounded-lg shadow-lg w-80">
+    <div class="bg-gray-700 p-4 rounded-lg shadow-lg w-[300px] h-[250px]">
     <div class="flex justify-between items-center mb-4">
       <div class="text-white font-semibold">Stock Value</div>
     </div>
