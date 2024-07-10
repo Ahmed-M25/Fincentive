@@ -1,14 +1,18 @@
 <template>
   <div id="Dashboard" class="flex flex-col items-center justify-center w-full h-full min-h-screen bg-gray-900 text-white">
-    <div class="card-container bg-gray-800 p-6 rounded-3xl shadow-lg w-full max-w-6xl max-h-[90vh] overflow-y-auto relative min-h-[80vh] flex flex-col justify-center">
-      <button @click="logout" class="absolute top-8 right-4 px-2 py-1 text-m bg-gray-800 rounded hover:underline">Logout</button>
-      <a href="/home" class="absolute top-8 right-[82px] px-2 py-1 text-m hover:underline">home</a>
-      <h1 class="text-3xl border-l-4 border-[#22A6FF] pl-4 font-headline font-bold absolute top-8">Fincentive</h1>
-      <div class="cards-container flex justify-center space-x-10 mt-6 w-full">
+    <div class="card-container bg-gray-800 p-6 rounded-3xl shadow-lg w-full max-w-6xl max-h-[90vh] overflow-y-auto relative min-h-screen flex flex-col justify-center">
+      <div class="flex items-center justify-start">
+        <h1 class="text-3xl border-l-4 border-[#22A6FF] pl-4 font-headline font-bold">Fincentive</h1>
+        <div class="ml-auto">
+          <a href="/home" class="px-2 py-1 text-m hover:underline">home</a>
+          <button @click="logout" class="px-2 py-1 text-m bg-gray-800 rounded hover:underline">Logout</button>
+        </div>
+      </div>
+      <div class="cards-container flex flex-col justify-center items-center xl:flex-row flex-wrap space-x-10 mt-4 w-full">
         <BalanceCard :currentBalance="currentBalance" :percentProfit="percentProfit" class="w-1/4" />
         <!-- <ProfitCard :percentProfit="percentProfit" class="w-1/4" /> -->
         <StockValue :stockValue="stockValue" class="w-1/4"/>
-        <div class="trade-section bg-gray-700 p-4 rounded-lg shadow-lg w-80">
+        <div class="trade-section bg-gray-700 p-4 rounded-lg shadow-lg w-[300px] h-[250px]">
           <div class="flex justify-between items-center mb-4">
             <div class="text-white font-semibold">Trade Stocks</div>
           </div>
