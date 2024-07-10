@@ -49,7 +49,23 @@ export default {
       throw error;
     }
 
-    console.log(responseData);
+    const backendResponse = await fetch('http://localhost:3000/createUser', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        firebaseId: responseData.localId,
+        email: payload.email,
+      }),
+    });
+
+    if (!backendResponse.ok) {
+      const error = new Error('Failed to create user in the database.');
+      throw error;
+    }
+
+
     context.commit("setUser", {
       token: responseData.idToken,
       userId: responseData.localId,

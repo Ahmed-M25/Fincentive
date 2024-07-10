@@ -75,7 +75,7 @@ export default {
       ticker: 'IBM',
       shares: 1,
       duration: 'Max',
-      currentBalance: 10000, // replace later
+      currentBalance: 0, // replace later
       percentProfit: 5, // replace later
       stockValue: 300 // replace later
     };
@@ -83,7 +83,38 @@ export default {
   computed: {
     ...mapGetters('auth', ['token'])
   },
+  mounted() {
+    this.fetchBalance();
+  },
   methods: {
+    async fetchBalance() {
+      try {
+        const idToken = this.token;
+
+        if (!idToken) {
+          throw new Error("ID token is missing");
+        }
+
+        const response = await fetch('http://localhost:3000/api/balance', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            firebaseIdToken: idToken
+          })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          this.currentBalance = data.balance;
+        } else {
+          console.error('Error fetching balance');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    },
     updateTicker() {
       this.updateMetrics();
     },
@@ -113,7 +144,7 @@ export default {
           throw new Error("ID token is missing");
         }
 
-        const response = await fetch('http://localhost:3000/transaction', {
+        const response = await fetch('http://localhost:3000/api/transaction', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -128,6 +159,7 @@ export default {
 
         if (response.ok) {
           console.log('Transaction recorded');
+          await this.fetchBalance();
           this.updateMetrics();
         } else {
           console.error('Error recording transaction');
@@ -138,7 +170,7 @@ export default {
     },
     logout() {
       this.$store.dispatch('auth/logout');
-      this.$router.push('/login');
+      this.$router.push('/');
     }
   },
 };
