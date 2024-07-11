@@ -123,7 +123,7 @@ export default {
       this.updateMetrics();
     },
     updateMetrics() { // add logic later
-      this.currentBalance = Math.floor(Math.random() * 20000) + 5000;
+      // this.currentBalance = Math.floor(Math.random() * 20000) + 5000;
       this.percentProfit = parseFloat((Math.random() * 100).toFixed(2));
       this.stockValue = Math.floor(Math.random() * 20000) + 5000;
     },
