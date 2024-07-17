@@ -160,8 +160,7 @@ export default {
   computed: {
     apiLink() {
       const apiKey = import.meta.env.VUE_APP_API_KEY;
-      // return `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${this.ticker}&outputsize=full&apikey=${apiKey}`;
-      return `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${this.ticker}&outputsize=full&apikey=demo`;
+      return `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${this.ticker}&outputsize=full&apikey=${apiKey}`;
     },
   },
   mounted() {
