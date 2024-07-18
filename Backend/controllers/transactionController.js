@@ -15,7 +15,7 @@ const recordTransaction = async (req, res) => {
     const stockPrice = await fetchRecentStockPrice(ticker);
     const totalCost = stockPrice * shares;
 
-    // Ensure user exists in database
+    // Ensure user exists in databasef
     connection.query(
       'INSERT IGNORE INTO users (firebase_id, balance) VALUES (?, 1000000.00)',
       [firebaseId],

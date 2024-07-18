@@ -85,6 +85,7 @@ export default {
   },
   mounted() {
     this.fetchBalance();
+    this.fetchStockValue();
   },
   methods: {
     async fetchBalance() {
@@ -110,6 +111,34 @@ export default {
           this.currentBalance = data.balance;
         } else {
           console.error('Error fetching balance');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    },
+    async fetchStockValue() {
+      try {
+        const idToken = this.token;
+
+        if (!idToken) {
+          throw new Error("ID token is missing");
+        }
+
+        const response = await fetch('http://localhost:3000/api/stock-value', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            firebaseIdToken: idToken
+          })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          this.stockValue = data.totalStockValue;
+        } else {
+          console.error('Error fetching stock value');
         }
       } catch (error) {
         console.error('Error:', error);
@@ -160,6 +189,7 @@ export default {
         if (response.ok) {
           console.log('Transaction recorded');
           await this.fetchBalance();
+          await this.fetchStockValue();
           this.updateMetrics();
         } else {
           console.error('Error recording transaction');
