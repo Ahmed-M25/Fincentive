@@ -86,6 +86,7 @@ export default {
   mounted() {
     this.fetchBalance();
     this.fetchStockValue();
+    this.updateMetrics();
   },
   methods: {
     async fetchBalance() {
@@ -136,7 +137,7 @@ export default {
 
         if (response.ok) {
           const data = await response.json();
-          this.stockValue = data.totalStockValue;
+          this.stockValue = parseFloat(data.totalStockValue).toFixed(2);
         } else {
           console.error('Error fetching stock value');
         }
@@ -153,8 +154,8 @@ export default {
     },
     updateMetrics() { // add logic later
       // this.currentBalance = Math.floor(Math.random() * 20000) + 5000;
-      this.percentProfit = parseFloat((Math.random() * 100).toFixed(2));
-      this.stockValue = Math.floor(Math.random() * 20000) + 5000;
+      this.percentProfit = parseFloat((((this.currentBalance + this.stockValue)/1000000) * 100).toFixed(2));
+      // this.stockValue = Math.floor(Math.random() * 20000) + 5000;
     },
     async buyShares() {
       await this.recordTransaction('buy');
